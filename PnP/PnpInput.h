@@ -6,7 +6,7 @@
 #define PNP_USING_EIGEN_LIBRARY_PNPINPUT_H
 
 #include <memory>
-#include "Definitions.h"
+#include "../Utils_pnp/Definitions.h"
 
 namespace PnP {
     class PnpInput {

@@ -10,20 +10,20 @@
 #include <string>
 #include <vector>
 #include <random>
-#include "Utils.h"
-#include "Product.h"
-#include "frame.h"
+#include "../Utils.h"
+#include "../Product.h"
+#include "../frame.h"
 #include <opencv2/core.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/opencv.hpp>
-#include "motion_vectors.h"
+#include "../motion_vectors.h"
 #include "PnpObjective.h"
 #include "PnpInput.h"
 #include "BarrierMethodSettings.h"
 #include "PnpProblemSolver.h"
 #include <Eigen/src/Core/Matrix.h>
-#include "Projection.h"
+#include "../Projection.h"
 #include <opencv2/core/eigen.hpp>
 // C++
 #include <thread>
@@ -31,8 +31,7 @@
 #include <opencv2/calib3d.hpp>
 #include <dirent.h>
 //#include "mkl.h"
-#include "PnPProblem.h"
-#include "Product.h"
+#include "../PnPProblem.h"
 
 
 
