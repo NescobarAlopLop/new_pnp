@@ -52,6 +52,3 @@ target_link_libraries( track_drone ${OpenCV_LIBS} stdc++fs -ltbb -lstdc++ -lm -l
 
 add_executable(sample_rotation examples/test_simple_rotation.cpp ${sample_pnplib})
 target_link_libraries(sample_rotation ${OpenCV_LIBS} stdc++fs -ltbb -lstdc++ -lm -ldl -lswscale -lavformat -lavcodec -lswresample -lavutil -lpthread -lz -lc -lrt)
-
-add_executable(opencv_units examples/opencv_units.cpp)
-target_link_libraries(opencv_units ${OpenCV_LIBS})
