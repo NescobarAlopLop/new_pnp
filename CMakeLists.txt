@@ -56,9 +56,9 @@ target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_include_directories(${PROJECT_NAME} PRIVATE src)
 
 target_link_libraries(${PROJECT_NAME}
-        ${OpenCV_LIBS} stdc++fs -ltbb -lstdc++ -lm -ldl -lswscale -lavformat -lavcodec -lswresample -lavutil -lpthread -lz -lc -lrt
+        ${OpenCV_LIBS}
         ${EIGEN3_LIBS}
-        )
+)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 add_executable(sample_rotation examples/test_simple_rotation.cpp)
