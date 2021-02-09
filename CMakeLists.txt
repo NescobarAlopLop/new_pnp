@@ -1,5 +1,4 @@
 cmake_minimum_required(VERSION 3.3.4)
-project(track_drone)
 project(new_pnp VERSION 0.0.1 DESCRIPTION "new and faster PnP library")
 
 set(CMAKE_CXX_STANDARD 17)
@@ -18,27 +17,19 @@ find_package(Eigen3 3.3.4 REQUIRED)
 
 find_package( OpenCV 3.2.0 REQUIRED )
 set(source_files
-        ${PROJECT_SOURCE_DIR}/motion_vectors.cpp
-        ${PROJECT_SOURCE_DIR}/Utils.cpp
-        ${PROJECT_SOURCE_DIR}/Product.cpp
         ${PROJECT_SOURCE_DIR}/PnPProblem.cpp
-        ${PROJECT_SOURCE_DIR}/RobustMatcher.cpp
-        ${PROJECT_SOURCE_DIR}/frame.cpp
-        ${PROJECT_SOURCE_DIR}/Utils.cpp
-        ${PROJECT_SOURCE_DIR}/Projection.cpp
-        ${PROJECT_SOURCE_DIR}/PnP/PnpInput.cpp
-        ${PROJECT_SOURCE_DIR}/Utils_pnp/Parsing.cpp
         ${PROJECT_SOURCE_DIR}/Utils_pnp/Definitions.h
-        ${PROJECT_SOURCE_DIR}/PnP/PnpObjective.cpp
-        ${PROJECT_SOURCE_DIR}/PnP/PnpProblemSolver.cpp
-        ${PROJECT_SOURCE_DIR}/PnP/DualVar.cpp
-        ${PROJECT_SOURCE_DIR}/PnP/PnpBarrierMethodSolver.cpp
         ${PROJECT_SOURCE_DIR}/Utils_pnp/GeneralUtils.cpp
-        ${PROJECT_SOURCE_DIR}/PnP/PnpResult.cpp
-        ${PROJECT_SOURCE_DIR}/PnP/PnpLocalSearch.cpp
-        ${PROJECT_SOURCE_DIR}/PnP/QuaternionVector.cpp
+        ${PROJECT_SOURCE_DIR}/Utils_pnp/Parsing.cpp
+        ${PROJECT_SOURCE_DIR}/src/DualVar.cpp
+        ${PROJECT_SOURCE_DIR}/src/PnpBarrierMethodSolver.cpp
+        ${PROJECT_SOURCE_DIR}/src/PnpInput.cpp
+        ${PROJECT_SOURCE_DIR}/src/PnpLocalSearch.cpp
+        ${PROJECT_SOURCE_DIR}/src/PnpObjective.cpp
+        ${PROJECT_SOURCE_DIR}/src/PnpProblemSolver.cpp
+        ${PROJECT_SOURCE_DIR}/src/PnpResult.cpp
+        ${PROJECT_SOURCE_DIR}/src/QuaternionVector.cpp
         )
-ocv_include_modules_recurse(${OPENCV_CPP_SAMPLES_REQUIRED_DEPS})
 
 # TODO: library creation file and directory
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
@@ -50,11 +41,11 @@ set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 
 # TODO: public headers file
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER
-        PnP/PnpProblemSolver.h
+        include/PnpProblemSolver.h
 #        PnPProblem.h
 )
 include_directories(
-        ${PROJECT_SOURCE_DIR}/PnP
+        ${PROJECT_SOURCE_DIR}/include
         ${PROJECT_SOURCE_DIR}/Utils_pnp
         ${EIGEN3_INCLUDE_DIR}
         ${OpenCV_INCLUDE_DIRS}
@@ -70,5 +61,5 @@ target_link_libraries(${PROJECT_NAME}
         )
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
-add_executable(sample_rotation_library examples/test_simple_rotation.cpp)
-target_link_libraries(sample_rotation_library ${PROJECT_NAME})
+add_executable(sample_rotation examples/test_simple_rotation.cpp)
+target_link_libraries(sample_rotation ${PROJECT_NAME})

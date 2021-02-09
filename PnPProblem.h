@@ -7,7 +7,6 @@
 #include <opencv2/highgui/highgui.hpp>
 
 
-
 class PnPProblem
 {
 public:

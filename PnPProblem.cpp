@@ -1,8 +1,9 @@
-
 #include <vector>
-#include <random>
+
 #include "PnPProblem.h"
 #include <opencv2/calib3d/calib3d.hpp>
+
+
 // Custom constructor given the intrinsic camera parameters
 PnPProblem::PnPProblem(const double params[])
 {
@@ -18,10 +19,7 @@ PnPProblem::PnPProblem(const double params[])
 
 }
 
-PnPProblem::~PnPProblem()
-{
-    // TODO Auto-generated destructor stub
-}
+PnPProblem::~PnPProblem()=default;
 
 void PnPProblem::set_P_matrix( const cv::Mat &R_matrix, const cv::Mat &t_matrix)
 {
