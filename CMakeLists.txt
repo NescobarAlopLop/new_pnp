@@ -9,7 +9,7 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wno-deprecated-declarations -O3 -march=nati
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wno-deprecated-declarations -O3 -march=native")
 
 include_directories(${CMAKE_SOURCE_DIR}/src)
-include_directories(${PROJECT_SOURCE_DIR}/eigen-3.3.7)
+find_package(Eigen3 3.3.4 REQUIRED)
 
 # TODO: optional add mkl support for faster and more accurate results
 #set(MKLROOT "/home/$USER/intel/compilers_and_libraries_2020.1.217/linux/mkl/")
@@ -40,11 +40,15 @@ set(source_files
         )
 ocv_include_modules_recurse(${OPENCV_CPP_SAMPLES_REQUIRED_DEPS})
 
+# TODO: library creation file and directory
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 add_library(${PROJECT_NAME} SHARED
         ${source_files}
         )
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
+
+# TODO: public headers file
 set_target_properties(${PROJECT_NAME} PROPERTIES PUBLIC_HEADER
         PnP/PnpProblemSolver.h
 #        PnPProblem.h
@@ -53,20 +57,18 @@ include_directories(
         ${PROJECT_SOURCE_DIR}/PnP
         ${PROJECT_SOURCE_DIR}/Utils_pnp
         ${EIGEN3_INCLUDE_DIR}
+        ${OpenCV_INCLUDE_DIRS}
 )
+include_directories(-Idependencies/include -Ldependencies/lib)
 
 target_include_directories(${PROJECT_NAME} PRIVATE include)
 target_include_directories(${PROJECT_NAME} PRIVATE src)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 target_link_libraries(${PROJECT_NAME}
         ${OpenCV_LIBS} stdc++fs -ltbb -lstdc++ -lm -ldl -lswscale -lavformat -lavcodec -lswresample -lavutil -lpthread -lz -lc -lrt
         ${EIGEN3_LIBS}
         )
 
-include_directories(${OpenCV_INCLUDE_DIRS})
-
-include_directories(-Idependencies/include -Ldependencies/lib)
-
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/bin)
 add_executable(sample_rotation_library examples/test_simple_rotation.cpp)
 target_link_libraries(sample_rotation_library ${PROJECT_NAME})
