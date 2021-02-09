@@ -29,14 +29,14 @@ set(source_files
         ${PROJECT_SOURCE_DIR}/src/PnpProblemSolver.cpp
         ${PROJECT_SOURCE_DIR}/src/PnpResult.cpp
         ${PROJECT_SOURCE_DIR}/src/QuaternionVector.cpp
-        )
+)
 
 # TODO: library creation file and directory
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
 
 add_library(${PROJECT_NAME} SHARED
         ${source_files}
-        )
+    )
 set_target_properties(${PROJECT_NAME} PROPERTIES VERSION ${PROJECT_VERSION})
 
 # TODO: public headers file
